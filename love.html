@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Love Letter</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffe6f2;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .card {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transform: scale(0.95);
+            animation: cardAppear 1s ease-out forwards;
+            z-index: 10;
+            overflow: hidden;
+        }
+        
+        @keyframes cardAppear {
+            to { transform: scale(1); }
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #ff66b3;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .teddy-container {
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            animation: bounce 4s ease infinite;
+        }
+        
+        .teddy {
+            width: 120px;
+            height: 120px;
+            background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/eb59aeaf-cb87-4c96-a3cc-748a62b30b84.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            transform: rotate(15deg);
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0;
+            z-index: 1;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-500px) rotate(20deg);
+                opacity: 0;
+            }
+        }
+        
+        .images-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .image-frame {
+            width: 45%;
+            margin: 10px 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-frame:hover {
+            transform: scale(1.05);
+        }
+        
+        .image-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .heart-quote {
+            margin-top: 30px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #ff66b3;
+            position: relative;
+            padding: 20px;
+            background: rgba(255, 182, 193, 0.1);
+            border-radius: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .hearts-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 768px) {
+            .images-container {
+                flex-direction: column;
+            }
+            .image-frame {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-background" id="hearts-bg"></div>
+    
+    <div class="card">
+        <h1>To My Wonderful Boyfriend</h1>
+        
+        <p style="font-size: 1.2rem; line-height: 1.6; color: #555;">
+            Every moment with you feels like a beautiful dream I never want to wake up from. 
+            Your love fills my heart with joy and my days with happiness. 
+            I'm so grateful to have you in my life.
+        </p>
+        
+        <div class="images-container">
+            <div class="image-frame">
+                <img src="love.jpg" alt="Romantic moment of us together under the stars with soft lighting" />
+            </div>
+            <div class="image-frame">
+                <img src="love2.jpg" alt="Joyful picture of us laughing together in golden sunset light" />
+            </div>
+        </div>
+        
+        <div class="heart-quote">
+            "My heart belongs to you forever. I love you so much."
+        </div>
+        
+        <div class="teddy-container">
+            <div class="teddy"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create falling hearts
+            const heartsContainer = document.getElementById('hearts-bg');
+            const colors = ['#ff66b3', '#ff99cc', '#ffb6c1', '#ffccd5', '#ffdfe6'];
+            
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                
+                heartsContainer.appendChild(heart);
+            }
+            
+            // Extra sparkle effect when clicking anywhere
+            document.addEventListener('click', function(e) {
+                const x = e.clientX;
+                const y = e.clientY;
+                
+                const burst = document.createElement('div');
+                burst.style.position = 'fixed';
+                burst.style.left = x + 'px';
+                burst.style.top = y + 'px';
+                burst.style.fontSize = '30px';
+                burst.style.color = colors[Math.floor(Math.random() * colors.length)];
+                burst.style.pointerEvents = 'none';
+                burst.style.animation = 'float 2s ease-out forwards';
+                burst.style.transform = 'translateY(0)';
+                burst.innerHTML = '❤️';
+                
+                document.body.appendChild(burst);
+                
+                setTimeout(() => {
+                    burst.remove();
+                }, 2000);
+            });
+            
+            // Animate card opening
+            setTimeout(() => {
+                const card = document.querySelector('.card');
+                card.style.boxShadow = '0 15px 40px rgba(255, 102, 179, 0.3)';
+                
+                // Make teddy appear
+                setTimeout(() => {
+                    document.querySelector('.teddy-container').style.opacity = '1';
+                }, 500);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
+
